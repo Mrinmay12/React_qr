@@ -7,7 +7,7 @@ export default function Qrcode() {
         const handleScan = data => {
           if (data) {
             // Redirect to the scanned URL
-            window.location.href = "https://accounts.zoho.in/signin?servicename=ZohoHome&serviceurl=%2F&signupurl=https%3A%2F%2Fwww.zoho.com%2Fsignup.html";
+            window.location.href = "https://coderapp-eta.vercel.app/";
           }
         }
     
@@ -32,7 +32,7 @@ export default function Qrcode() {
         </div>
         {value==="1" ?(
 
-<QRCode value="https://accounts.zoho.in/signin?servicename=ZohoHome&serviceurl=%2F&signupurl=https%3A%2F%2Fwww.zoho.com%2Fsignup.html" />
+<QRCode value="https://coderapp-eta.vercel.app/" />
         ):(
             <>
             <p>scanned</p>
@@ -41,6 +41,7 @@ export default function Qrcode() {
       onError={handleError}
       onScan={handleScan}
       style={{ width: '100%' }}
+      facingMode="environment" 
     />
 
 </>
