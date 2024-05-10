@@ -41,7 +41,10 @@ export default function Qrcode() {
       onError={handleError}
       onScan={handleScan}
       style={{ width: '100%' }}
-      facingMode="environment" 
+      key="environment"
+      constraints={{
+      audio: false,
+      video: { facingMode: "environment" }} }
     />
 
 </>
