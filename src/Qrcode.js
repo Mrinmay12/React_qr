@@ -2,7 +2,6 @@ import "./index.css";
 import { useState } from "react";
 import {QrReader} from "react-qr-reader";
 
-import { useEffect } from "react";
 
 const Qrcode = () => {
   const [code, setCode] = useState(null);
@@ -12,13 +11,14 @@ const Qrcode = () => {
   const [selected, setSelected] = useState("environment");
   const [errorMessage, setErrorMessage] = useState(null);
 
- 
+
 
   const handleScan = async (scanData) => {
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "" && !showDialog && !processing) {
       console.log(`loaded >>>`, scanData);
-     
+      // setPrecScan(scanData);
+   
     }
   };
   const handleError = (err) => {
