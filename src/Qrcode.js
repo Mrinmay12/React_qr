@@ -1,7 +1,7 @@
 import "./index.css";
 import { useState } from "react";
 import {QrReader} from "react-qr-reader";
-import axios from "axios";
+
 import { useEffect } from "react";
 
 const Qrcode = () => {
