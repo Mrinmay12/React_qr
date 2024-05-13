@@ -12,45 +12,13 @@ const Qrcode = () => {
   const [selected, setSelected] = useState("environment");
   const [errorMessage, setErrorMessage] = useState(null);
 
-  async function fetchData({ qr = "" }) {
-    try {
-      setProcessing(true);
-      const result = await axios.get(
-        `https://ucs-goma-backend.herokuapp.com/payement/scan?matricule=${qr}&forThisYear=1`
-      );
-      console.log("scanned code", qr);
-      const { message, payement } = result.data;
-      console.log(payement);
-      if (!message) {
-        setCode({
-          text: payement.matricule,
-          identite: `${payement.nom} ${payement.postnom} ${payement.prenom}`,
-          promotion: payement.auditoire,
-          annee: payement.annee,
-          frais: Number.parseFloat(payement.totalPayer),
-          total: Number.parseFloat(payement.totalAPayer),
-          recouvrement: "Premiere tranche",
-          maxEncours: 800
-        });
-        // setPrecScan(null);
-        setDiaglog(true);
-      } else {
-        setCode(null);
-        setPrecScan(null);
-        setErrorMessage(message);
-        setDiaglog(true);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+ 
 
   const handleScan = async (scanData) => {
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "" && !showDialog && !processing) {
       console.log(`loaded >>>`, scanData);
-      // setPrecScan(scanData);
-      await fetchData({ qr: scanData });
+     
     }
   };
   const handleError = (err) => {
