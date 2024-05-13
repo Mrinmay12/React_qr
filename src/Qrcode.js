@@ -1,57 +1,47 @@
-import React, { useState } from 'react'
-import QRCode from 'qrcode.react';
-import {QrReader} from 'react-qr-reader';
-export default function Qrcode() {
 
+import { useState } from "react";
+import {QrReader} from "react-qr-reader";
+import { useEffect } from "react";
+
+const Qrcode = () => {
+  const [code, setCode] = useState(null);
+  const [showDialog, setDiaglog] = useState(false);
+  const [processing, setProcessing] = useState(false);
+  const [precScan, setPrecScan] = useState("");
   const [selected, setSelected] = useState("environment");
-        const handleScan = data => {
-          if (data) {
-            // Redirect to the scanned URL
-            window.location.href = "https://coderapp-eta.vercel.app/";
-          }
-        }
-    
-        const handleError = err => {
-          console.error(err);
-        }
+  const [errorMessage, setErrorMessage] = useState(null);
 
-        const [value,setValue]=useState("1")
-
-        const handleOpen=(e)=>{
-            setValue(e)
-        }
-  return (
-    <div>
-        <div style={{ display:"flex",flexDirection:"row" ,justifyContent:"space-between"}}>
-            <p onClick={()=>handleOpen("1")} style={{cursor:"pointer" ,color:value==="1"?"red":"black"}}>
-                your qr 
-            </p>
-            <p style={{ paddingLeft:"49px",cursor:"pointer",color:value==="2"?"red":"black" }} onClick={()=>handleOpen("2")}>
-                scanned qr 
-            </p>
-        </div>
-        {value==="1" ?(
-
-<QRCode value="https://coderapp-eta.vercel.app/" />
-        ):(
-            <>
-            <p>scanned</p>
-<QrReader
-      onError={handleError}
-      onScan={handleScan}
-      delay={500}
-      // style={{ width: '100%' }}
-      facingMode={selected}
-      style={{ width: "200px", heigth: "100px" }}
+  
+  const handleScan = async (scanData) => {
+    console.log(`loaded data data`, scanData);
+    if (scanData && scanData !== "" && !showDialog && !processing) {
+      console.log(`loaded >>>`, scanData);
      
-    />
-
-</>
-        )}
-
-
-
-
+    }
+  };
+  const handleError = (err) => {
+    console.error(err);
+  };
+  return (
+    <div className="App">
+     
+      <h2>
+        Last Scan:{precScan}
+        {selected}
+      </h2>
+   
+      {!showDialog && !processing && (
+        <QrReader
+          facingMode={selected}
+          delay={500}
+          onError={handleError}
+          onScan={handleScan}
+          // chooseDeviceId={()=>selected}
+          style={{ width: "200px", heigth: "100px" }}
+        />
+      )}
     </div>
-  )
-}
+  );
+};
+
+export default Qrcode;
