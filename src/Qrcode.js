@@ -3,7 +3,7 @@ import QRCode from 'qrcode.react';
 import {QrReader} from 'react-qr-reader';
 export default function Qrcode() {
 
-
+  const [selected, setSelected] = useState("environment");
         const handleScan = data => {
           if (data) {
             // Redirect to the scanned URL
@@ -37,14 +37,13 @@ export default function Qrcode() {
             <>
             <p>scanned</p>
 <QrReader
-      delay={300}
       onError={handleError}
       onScan={handleScan}
-      style={{ width: '100%' }}
-      key="environment"
-      constraints={{
-      audio: false,
-      video: { facingMode: "environment" }} }
+      delay={500}
+      // style={{ width: '100%' }}
+      facingMode={selected}
+      style={{ width: "200px", heigth: "100px" }}
+     
     />
 
 </>
