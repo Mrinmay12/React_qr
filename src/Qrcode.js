@@ -1,33 +1,42 @@
-import React, { useState } from 'react'
-import QRCode from 'qrcode.react';
-import {QrReader} from 'react-qr-reader';
+import React, { useState } from "react";
+import QRCode from "qrcode.react";
+import { QrReader } from "react-qr-reader";
+import Apkfile from "./App.apk"
+import Imagecard from "./imagecard.png"
 export default function Qrcode() {
-
   const [selected, setSelected] = useState("environment");
-        const handleScan = data => {
-          if (data) {
-            // Redirect to the scanned URL
-            window.location.href = "https://coderapp-eta.vercel.app/";
-          }
-        }
-    
-        const handleError = err => {
-          console.error(err);
-        }
+  const handleScan = async (scanData) => {
+    console.log(`loaded data data`, scanData);
+  };
 
-        const [value,setValue]=useState("1")
+  const handleError = (err) => {
+    console.error(err);
+  };
 
-        const handleOpen=(e)=>{
-            setValue(e)
-        }
+  const [value, setValue] = useState("1");
+
+  const handleOpen = (e) => {
+    setValue(e);
+  };
+
+  const handleDownload = () => {
+    const fileUrl =Apkfile;
+    const anchor = document.createElement('a');
+    anchor.href = fileUrl;
+    anchor.download = 'mrinmay.apk';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    // alert('Your download will start shortly. Please open the downloaded APK file to install the application.');
+  };
   return (
     <div>
-        <div style={{ display:"flex",flexDirection:"row" ,justifyContent:"space-between"}}>
+      <div style={{ display:"flex",flexDirection:"row" ,justifyContent:"space-between"}}>
             <p onClick={()=>handleOpen("1")} style={{cursor:"pointer" ,color:value==="1"?"red":"black"}}>
                 your qr 
             </p>
             <p style={{ paddingLeft:"49px",cursor:"pointer",color:value==="2"?"red":"black" }} onClick={()=>handleOpen("2")}>
-                scanned qr 
+                scanned qr  
             </p>
         </div>
         {value==="1" ?(
@@ -49,10 +58,7 @@ export default function Qrcode() {
 
 </>
         )}
-
-
-
-
+      <button onClick={handleDownload}>Download</button>
     </div>
-  )
+  );
 }
