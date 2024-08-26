@@ -4,6 +4,7 @@ import Qrcode from './Qrcode';
 import QrReader from './QrRead2';
 import TextEdite from './TextEdite';
 import Searchbar from './Searchbar/Searchbar';
+import Nofify from './Nofify';
 
 
 
@@ -14,7 +15,8 @@ function App() {
   
         {/* <Searchbar/> */}
    
-        <Qrcode/>
+        // <Qrcode/>
+        <Nofify/>
         {/* <QrReader/> */}
       </header>
     </div>
